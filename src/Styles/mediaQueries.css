@@ -1,0 +1,116 @@
+@media only screen and (max-width: 800px) {
+  .nlinks {
+    gap: 5vw;
+  }
+  .home > h1,
+  h5 {
+    text-align: center;
+  }
+  .contact {
+    padding: 0;
+    > form {
+      width: 100%;
+      height: 100%;
+      border-radius: 0;
+      > div {
+        width: 100%;
+      }
+    }
+  }
+  .formBorder {
+    display: none;
+  }
+  .cart {
+    > main > article {
+      padding: 1rem 0;
+      > div {
+        margin: 10px 0;
+      }
+      a {
+        float: none;
+        text-align: center;
+        width: 100%;
+      }
+    }
+  }
+  .cartItem {
+    padding: 1rem;
+    height: 12vh;
+    > div > img {
+      height: 40px;
+    }
+    > div > h4 {
+      font-size: 1rem;
+      letter-spacing: normal;
+    }
+  }
+  .shipping {
+    > main {
+      padding: 10vw 5vw;
+      width: 100%;
+      > h1 {
+        font-size: 10vw;
+      }
+      > form {
+        width: 100%;
+        > div > input,
+        select {
+          width: 70vw;
+        }
+        > button {
+          width: 100%;
+          font-size: 20px;
+          padding: 10px;
+          margin-top: 15px;
+        }
+      }
+    }
+  }
+  .confirmOrder {
+    > main > form {
+      padding: 10vw 0;
+      > #btn {
+        width: 100%;
+      }
+    }
+  }
+  .orderDetails > main {
+    > article > h1 {
+      text-align: center;
+      font-size: 1.9rem;
+    }
+    > div {
+      > h1 {
+        font-size: 1.4rem;
+      }
+      > p {
+        letter-spacing: 1px;
+        font-size: 0.9rem;
+        margin: 2rem 0;
+      }
+    }
+  }
+  .dashboard {
+    height: unset;
+    min-height: 100vh;
+    > main {
+      > article{
+        flex-direction: column;
+        > div {
+          margin: 1rem;
+        }
+      }
+      > section {
+        flex-direction: column;
+        padding: 2rem;
+        > div {
+          width: 100%;
+          margin: 1rem 0;
+        }
+        > aside {
+          width: 100%;
+        }
+      }
+    }
+  }
+}
