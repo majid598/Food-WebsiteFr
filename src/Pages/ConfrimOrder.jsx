@@ -2,10 +2,12 @@ import { useDebugValue, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { usePlaceOrderMutation } from "../redux/api/api";
+import Loader from '../Components/Loader'
 import { toast } from "react-toastify";
 import { clearCart } from "../redux/reducers/cartReducer";
 
 const ConfirmOrder = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = useState("C.O.D");
@@ -15,6 +17,7 @@ const ConfirmOrder = () => {
   const [placeOrder] = usePlaceOrderMutation();
 
   const handleSubmit = (e) => {
+    setIsLoading(true);
     e.preventDefault();
     const order = {
       items,
@@ -24,25 +27,27 @@ const ConfirmOrder = () => {
       totalAmount: total,
       shippingInfo,
       paymentMethod,
-      paymentRef: "C.O.D",
+      paymentRef: "Hand",
     };
     if (paymentMethod === "Online") return navigate("/pay");
 
     placeOrder(order)
       .unwrap()
       .then((data) => {
+        setIsLoading(false);
         toast.success(data?.message);
         dispatch(clearCart());
         navigate("/order/success");
       })
       .catch((err) => {
-        console.log(err);
+        setIsLoading(false);
         toast.error(err?.data?.message);
       });
   };
 
   return (
     <section className="confirmOrder w-full h-[calc(100vh-5rem)] bg-pink-200">
+      {isLoading && <Loader message={"Order placing"}/>}
       <main className="max-w-[900px] bg-white mx-auto p-[2rem] h-full">
         <h1 className="text-4xl uppercase text-zinc-600 font-light text-center mt-20">
           Confirm Order

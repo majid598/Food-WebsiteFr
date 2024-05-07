@@ -3,6 +3,7 @@ import Founder from "../Components/Founder";
 import Menu from "../Components/Menu";
 
 const Home = () => {
+  
   const smoothScrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {

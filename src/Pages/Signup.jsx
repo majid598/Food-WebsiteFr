@@ -6,8 +6,10 @@ import { server } from "../redux/api/api";
 import { useDispatch } from "react-redux";
 import { userExists } from "../redux/reducers/userReducer";
 import { toast } from "react-toastify";
+import Loader from "../Components/Loader";
 
 const SignUp = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const [userDetails, setUserDetails] = useState({
     name: "",
@@ -19,17 +21,23 @@ const SignUp = () => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     await axios
       .post(`${server}/api/v1/user/new`, userDetails)
       .then(({ data }) => {
         dispatch(userExists(data?.user));
         toast.success(data?.message);
+        setIsLoading(false);
       })
-      .catch((err) => toast.error(err?.data?.message));
+      .catch((err) => {
+        setIsLoading(false);
+        toast.error(err?.data?.message);
+      });
   };
   return (
     <div className="contact w-full flex h-[calc(100vh-5rem)] overflow-x-hidden bg-no-repeat bg-cover py-10 bg-[url('./assets/bg.png')]">
+      {isLoading && <Loader message={"Signin up"}/>}
       <motion.form
         onSubmit={handleSubmit}
         initial={{

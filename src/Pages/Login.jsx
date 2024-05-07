@@ -3,11 +3,13 @@ import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { userExists } from "../redux/reducers/userReducer";
+import Loader from "../Components/Loader";
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { server } from "../redux/api/api";
 
 const Login = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [userDetails, setUserDetails] = useState({
@@ -18,6 +20,7 @@ const Login = () => {
     setUserDetails({ ...userDetails, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
+    setIsLoading(true);
     e.preventDefault();
     try {
       const { data } = await axios.post(
@@ -30,13 +33,15 @@ const Login = () => {
       navigate("/me");
       dispatch(userExists(true));
       toast.success(data?.message);
-      console.log(data);
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       toast.error(error?.response?.data?.message);
     }
   };
   return (
     <div className="contact w-full flex h-[calc(100vh-5rem)] overflow-x-hidden bg-no-repeat bg-cover py-10 bg-[url('./assets/bg.png')]">
+      {isLoading && <Loader message={"Loging in"} />}
       <motion.form
         onSubmit={handleSubmit}
         initial={{

@@ -48,11 +48,13 @@ const Cart = () => {
 
   const increment = (data) => {
     dispatch(addToCart(data));
+    dispatch(calculatePrice());
   };
 
   const decrement = (item) => {
     if (item.quantity <= 1) return;
     dispatch(removeFromCart({ itemNum: item.itemNum }));
+    dispatch(calculatePrice());
   };
 
   useEffect(() => {
