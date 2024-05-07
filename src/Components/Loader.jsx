@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const Loader = ({ message }) => {
   return (
-    <div className="w-full h-[calc(100vh-5rem)] flex items-center justify-center relative bg-pink-200">
+    <div className="w-full fixed top-0 left-0 h-screen flex items-center justify-center z-[999] bg-pink-200">
       <IoFastFoodOutline className="text-[15rem] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-pink-700 opacity-30" />
 
       <div className="loader text-4xl relative z-50 text-black">

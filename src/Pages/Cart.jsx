@@ -63,50 +63,56 @@ const Cart = () => {
 
   return (
     <div className="cart w-full h-[calc(100vh-5rem)] bg-pink-200">
-      <main className="max-w-[900px] p-[2rem] flex flex-col gap-5 h-full bg-white mx-auto">
-        {items?.map((item, index) => (
-          <CartItem
-            key={item?.itemNum}
-            title={item?.title}
-            img={item?.img}
-            value={item?.quantity}
-            increment={() => {
-              const data = {
-                title: item.title,
-                img: item.img,
-                itemNum: item.itemNum,
-                price: item.price,
-              };
-              increment(data);
-            }}
-            decrement={() => decrement(item)}
-          />
-        ))}
-        <article className="p-[2rem]">
-          <div className="flex justify-between my-[1rem]">
-            <h4>Sub Total</h4>
-            <p>PKR {subtotal}</p>
-          </div>
-          <div className="flex justify-between my-[1rem]">
-            <h4>Tax</h4>
-            <p>PKR {tax}</p>
-          </div>
-          <div className="flex justify-between my-[1rem]">
-            <h4>Shipping Charges</h4>
-            <p>PKR {shippingCharges}</p>
-          </div>{" "}
-          <div className="flex justify-between my-[1rem]">
-            <h4>Total</h4>
-            <p>PKR {total}</p>
-          </div>
-          <Link
-            to="/shipping"
-            className="bg-pink-600 rounded-md float-right text-white font-bold px-4 py-2 mt-3 inline-block"
-          >
-            Checkout
-          </Link>
-        </article>
-      </main>
+      {items.length < 1 ? (
+        <div className="max-w-[900px] p-[2rem] flex flex-col gap-5 h-full bg-white mx-auto items-center justify-center">
+          <h2 className="text-2xl font-semibold">No Items In Cart</h2>
+        </div>
+      ) : (
+        <main className="max-w-[900px] p-[2rem] flex flex-col gap-5 h-full bg-white mx-auto">
+          {items?.map((item, index) => (
+            <CartItem
+              key={item?.itemNum}
+              title={item?.title}
+              img={item?.img}
+              value={item?.quantity}
+              increment={() => {
+                const data = {
+                  title: item.title,
+                  img: item.img,
+                  itemNum: item.itemNum,
+                  price: item.price,
+                };
+                increment(data);
+              }}
+              decrement={() => decrement(item)}
+            />
+          ))}
+          <article className="p-[2rem]">
+            <div className="flex justify-between my-[1rem]">
+              <h4>Sub Total</h4>
+              <p>PKR {subtotal}</p>
+            </div>
+            <div className="flex justify-between my-[1rem]">
+              <h4>Tax</h4>
+              <p>PKR {tax}</p>
+            </div>
+            <div className="flex justify-between my-[1rem]">
+              <h4>Shipping Charges</h4>
+              <p>PKR {shippingCharges}</p>
+            </div>{" "}
+            <div className="flex justify-between my-[1rem]">
+              <h4>Total</h4>
+              <p>PKR {total}</p>
+            </div>
+            <Link
+              to="/shipping"
+              className="bg-pink-600 rounded-md float-right text-white font-bold px-4 py-2 mt-3 inline-block"
+            >
+              Checkout
+            </Link>
+          </article>
+        </main>
+      )}
     </div>
   );
 };
