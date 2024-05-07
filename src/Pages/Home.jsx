@@ -3,7 +3,6 @@ import Founder from "../Components/Founder";
 import Menu from "../Components/Menu";
 
 const Home = () => {
-  
   const smoothScrollTo = (id) => {
     const element = document.getElementById(id);
     if (element) {
@@ -15,7 +14,7 @@ const Home = () => {
   };
   return (
     <div className="w-full">
-      <div className="home w-full min-h-[100vh] px-32 pt-[15vw] overflow-x-hidden">
+      <div className="home w-full min-h-[100vh] lg:px-32 md:px-24 px-10 pt-[15vw] overflow-x-hidden">
         <div className="w-full h-full flex flex-col lg:items-start md:items-start items-center">
           <motion.h1
             initial={{ x: "-100%", opacity: 0 }}
