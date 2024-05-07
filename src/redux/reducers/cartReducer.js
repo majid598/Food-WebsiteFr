@@ -56,9 +56,6 @@ const cartReducer = createSlice({
       state.totalPrice += price;
       saveCartState(state);
     },
-    removeCartItem: (state, action) => {
-      state.items = state.items.filter((i) => i.itemNum !== action.payload);
-    },
     removeFromCart(state, action) {
       const { itemNum } = action.payload;
       const existingItem = state.items.find((item) => item.itemNum === itemNum);
@@ -70,6 +67,17 @@ const cartReducer = createSlice({
           existingItem.quantity -= 1;
         }
 
+        state.totalItems -= 1;
+        state.totalPrice -= existingItem.price;
+        saveCartState(state);
+      }
+    },
+    removeCartItem(state, action) {
+      const { itemNum } = action.payload;
+      const existingItem = state.items.find((item) => item.itemNum === itemNum);
+
+      if (existingItem) {
+          state.items = state.items.filter((item) => item.itemNum !== itemNum);
         state.totalItems -= 1;
         state.totalPrice -= existingItem.price;
         saveCartState(state);

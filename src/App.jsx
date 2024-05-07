@@ -67,7 +67,7 @@ const App = () => {
           }
         />
         <Route
-        // element={<ProtectedRopute isAuthenticated={user ? true : false} />}
+          element={<ProtectedRopute isAuthenticated={user ? true : false} />}
         >
           <Route path="/shipping" element={<Shipping />} />
           <Route path="/order/confrim" element={<ConfirmOrder />} />
