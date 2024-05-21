@@ -8,6 +8,7 @@ const Shipping = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { items } = useSelector((state) => state.cart);
+  const [countrySelected, setCountrySelected] = useState("");
   const [shippingInfo, setShippingInfo] = useState({
     houseNumber: "",
     city: "",
@@ -81,7 +82,11 @@ const Shipping = () => {
               <option value="">Country</option>
               {Country &&
                 Country.getAllCountries().map((i) => (
-                  <option value={i.isoCode} key={i.isoCode}>
+                  <option
+                    value={i.isoCode}
+                    onClick={() => setCountrySelected(i.name)}
+                    key={i.isoCode}
+                  >
                     {i.name}
                   </option>
                 ))}
@@ -98,7 +103,7 @@ const Shipping = () => {
             >
               <option value="">State</option>
               {State &&
-                State.getStatesOfCountry("PK").map((i) => (
+                State.getStatesOfCountry(setCountrySelected).map((i) => (
                   <option value={i.isoCode} key={i.isoCode}>
                     {i.name}
                   </option>
