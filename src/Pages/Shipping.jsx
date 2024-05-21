@@ -82,11 +82,7 @@ const Shipping = () => {
               <option value="">Country</option>
               {Country &&
                 Country.getAllCountries().map((i) => (
-                  <option
-                    value={i.isoCode}
-                    onClick={() => setCountrySelected(i.isoCode)}
-                    key={i.isoCode}
-                  >
+                  <option value={i.isoCode} key={i.isoCode}>
                     {i.name}
                   </option>
                 ))}
@@ -103,7 +99,7 @@ const Shipping = () => {
             >
               <option value="">State</option>
               {State &&
-                State.getStatesOfCountry(countrySelected).map((i) => (
+                State.getStatesOfCountry(shippingInfo.country).map((i) => (
                   <option value={i.isoCode} key={i.isoCode}>
                     {i.name}
                   </option>
