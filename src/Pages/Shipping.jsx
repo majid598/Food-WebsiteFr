@@ -84,7 +84,7 @@ const Shipping = () => {
                 Country.getAllCountries().map((i) => (
                   <option
                     value={i.isoCode}
-                    onClick={() => setCountrySelected(i.name)}
+                    onClick={() => setCountrySelected(i.isoCode)}
                     key={i.isoCode}
                   >
                     {i.name}
